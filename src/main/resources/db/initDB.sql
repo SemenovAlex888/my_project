@@ -1,5 +1,7 @@
 DROP TABLE IF EXISTS user_roles;
 DROP TABLE IF EXISTS users;
+DROP TABLE IF EXISTS dishes;
+DROP TABLE IF EXISTS restaurant CASCADE;
 DROP SEQUENCE IF EXISTS global_seq;
 
 CREATE SEQUENCE global_seq START WITH 100000;
@@ -21,3 +23,20 @@ CREATE TABLE user_roles
     CONSTRAINT user_roles_idx UNIQUE (user_id, role),
     FOREIGN KEY (user_id) REFERENCES users (id) ON DELETE CASCADE
 );
+
+CREATE TABLE restaurant
+(
+    id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+    name             VARCHAR                           NOT NULL,
+    address          VARCHAR                           NOT NULL
+);
+
+CREATE TABLE dishes
+(
+    id               INTEGER PRIMARY KEY DEFAULT nextval('global_seq'),
+    restaurant_id    INTEGER                           NOT NULL,
+    name             VARCHAR                           NOT NULL,
+    price            NUMERIC                           NOT NULL,
+    FOREIGN KEY (restaurant_id) REFERENCES restaurant(id) ON DELETE CASCADE
+);
+CREATE UNIQUE INDEX dishes_unique_restaurant_id_name ON dishes (restaurant_id, name);
