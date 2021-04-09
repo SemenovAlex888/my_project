@@ -1,7 +1,13 @@
-DELETE FROM user_roles;
-DELETE FROM users;
-DELETE FROM dishes;
-DELETE FROM restaurant;
+DELETE
+FROM user_roles;
+DELETE
+FROM users;
+DELETE
+FROM dishes;
+DELETE
+FROM restaurant;
+DELETE
+FROM votes;
 
 ALTER SEQUENCE global_seq RESTART WITH 100000;
 
@@ -48,7 +54,8 @@ VALUES (100005, 'English breakfast', 750.00),
        (100009, 'Salmon poke', 750.00),
        (100009, 'Mushroom soup', 400.00);
 
-
-
-
-
+INSERT INTO votes(user_id, date_time, restaurant_id)
+VALUES (100000, '2021-04-09 10:00:00', 100008),
+       (100002, '2021-04-09 11:00:00', 100007),
+       (100003, '2021-04-09 15:30:00', 100005),
+       (100004, '2021-04-09 09:20:00', 100008);
