@@ -6,25 +6,23 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
-import ru.my_project.model.User;
+import ru.my_project.model.Dish;
 
 import java.util.Optional;
 
 @Repository
 @Transactional(readOnly = true)
-public interface DataJpaUserRepository extends JpaRepository<User, Integer> {
+public interface DataJpaDishRepository extends JpaRepository<Dish, Integer> {
 
     @Transactional
     @Modifying
-    @Query("DELETE FROM User u WHERE u.id=:id")
+    @Query("DELETE FROM Dish d WHERE d.id=:id")
     int delete(@Param("id") int id);
 
-    User getByEmail(String email);
-
+    @Override
     @Transactional
-    @Override
-    User save(User user);
+    Dish save(Dish dish);
 
     @Override
-    Optional<User> findById(Integer id);
+    Optional<Dish> findById(Integer id);
 }
