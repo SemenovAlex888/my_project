@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.my_project.model.User;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -27,4 +28,7 @@ public interface DataJpaUserRepository extends JpaRepository<User, Integer> {
 
     @Override
     Optional<User> findById(Integer id);
+
+    @Override
+    List<User> findAll();
 }
