@@ -1,36 +1,36 @@
-package ru.my_project.web.user;
+package ru.my_project.web.restaurant;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import ru.my_project.model.User;
+import ru.my_project.model.Restaurant;
 
 import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = AdminRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class AdminRestController extends AbstractUserController {
+@RequestMapping(value = AdminRestaurantRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+public class AdminRestaurantRestController extends AbstractRestaurantRestController {
 
-    static final String REST_URL = "/admin/users";
+    static final String REST_URL = "/admin/restaurants";
 
     @Override
     @GetMapping
-    public List<User> getAll() {
-        return super.getAll();
+    public List<Restaurant> getAllWithDishes() {
+        return super.getAllWithDishes();
     }
 
     @Override
     @GetMapping("/{id}")
-    public User get(@PathVariable int id) {
+    public Restaurant get(@PathVariable int id) {
         return super.get(id);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<User> createWithLocation(@RequestBody User user) {
-        User created = super.create(user);
+    public ResponseEntity<Restaurant> createWithLocation(@RequestBody Restaurant restaurant) {
+        Restaurant created = super.create(restaurant);
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path(REST_URL + "/{id}")
                 .buildAndExpand(created.getId()).toUri();
@@ -47,13 +47,7 @@ public class AdminRestController extends AbstractUserController {
     @Override
     @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@RequestBody User user, @PathVariable int id) {
-        super.update(user, id);
-    }
-
-    @Override
-    @GetMapping("/by")
-    public User getByMail(@RequestParam String email) {
-        return super.getByMail(email);
+    public void update(@RequestBody Restaurant restaurant, @PathVariable int id) {
+        super.update(restaurant, id);
     }
 }
