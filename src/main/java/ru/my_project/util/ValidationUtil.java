@@ -4,7 +4,11 @@ import ru.my_project.model.AbstractBaseEntity;
 import ru.my_project.util.exception.IllegalRequestDataException;
 import ru.my_project.util.exception.NotFoundException;
 
+import java.time.LocalTime;
+
 public class ValidationUtil {
+
+    public static final LocalTime LIMIT_TIME_FOR_VOTING = LocalTime.of(11, 0, 0);
 
     public static <T> T checkNotFoundWithId(T object, int id) {
         checkNotFoundWithId(object != null, id);

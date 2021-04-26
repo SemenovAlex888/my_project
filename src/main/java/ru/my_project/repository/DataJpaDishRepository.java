@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.my_project.model.Dish;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -25,4 +26,7 @@ public interface DataJpaDishRepository extends JpaRepository<Dish, Integer> {
 
     @Override
     Optional<Dish> findById(Integer id);
+
+    @Query("SELECT d FROM Dish d WHERE d.restaurant.id=:restaurId ORDER BY d.name DESC")
+    List<Dish> getAll(@Param("restaurId") int restaurId);
 }

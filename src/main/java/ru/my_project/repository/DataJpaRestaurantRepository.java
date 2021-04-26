@@ -25,6 +25,7 @@ public interface DataJpaRestaurantRepository extends JpaRepository<Restaurant, I
     @Transactional
     Restaurant save(Restaurant restaurant);
 
+    //    https://stackoverflow.com/a/46013654/548473
     @EntityGraph(attributePaths = {"dishes"}, type = EntityGraph.EntityGraphType.LOAD)
     @Query("SELECT r FROM Restaurant r")
     List<Restaurant> findAllWithDishes();

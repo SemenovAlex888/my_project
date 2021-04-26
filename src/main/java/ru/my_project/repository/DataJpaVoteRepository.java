@@ -31,4 +31,7 @@ public interface DataJpaVoteRepository extends JpaRepository<Vote, Integer> {
     // join fetch: https://dou.ua/lenta/articles/jpa-fetch-types/
     @Query("SELECT v FROM Vote v JOIN FETCH v.restaurant WHERE v.user.id=?1 AND v.date = ?2")
     Vote getVote(int userId, LocalDate date);
+
+    @Query("SELECT v FROM Vote v WHERE v.user.id=?1 AND v.date = ?2")
+    Vote getVoteCurrentDate(int userId, LocalDate date);
 }
