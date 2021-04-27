@@ -9,7 +9,7 @@ FROM restaurant;
 DELETE
 FROM votes;
 
-ALTER SEQUENCE global_seq RESTART WITH 100000;
+ALTER SEQUENCE GLOBAL_SEQ RESTART WITH 100000;
 
 INSERT INTO users (name, email, password)
 VALUES ('User1', 'user1@yandex.ru', 'password'),
