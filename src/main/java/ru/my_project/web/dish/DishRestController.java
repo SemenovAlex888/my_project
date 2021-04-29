@@ -21,7 +21,7 @@ import static ru.my_project.util.ValidationUtil.*;
 @RequestMapping(value = DishRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class DishRestController {
 
-    static final String REST_URL = "/restaurant/dishes";
+    static final String REST_URL = "/admin/restaurant/dishes";
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired

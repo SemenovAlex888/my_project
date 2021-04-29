@@ -6,10 +6,10 @@ import org.springframework.web.bind.annotation.*;
 import ru.my_project.model.User;
 
 @RestController
-@RequestMapping(value = ProfileRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
-public class ProfileRestController extends AbstractUserController {
+@RequestMapping(value = UserRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
+public class UserRestController extends AbstractUserController {
 
-    static final String REST_URL = "/profile";
+    static final String REST_URL = "/user";
     private final int ID = 100000;  // Todo: change on Spring security
 
     @GetMapping
