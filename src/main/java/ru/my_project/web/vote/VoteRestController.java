@@ -9,9 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import ru.my_project.model.Vote;
-import ru.my_project.repository.DataJpaRestaurantRepository;
-import ru.my_project.repository.DataJpaUserRepository;
-import ru.my_project.repository.DataJpaVoteRepository;
+import ru.my_project.service.RestaurantService;
+import ru.my_project.service.UserService;
+import ru.my_project.service.VoteService;
 import ru.my_project.util.exception.NotFoundException;
 
 import java.time.LocalDate;
@@ -28,32 +28,32 @@ public class VoteRestController {
     private final int ID = 100000;  // Todo: change on Spring security
 
     @Autowired
-    private DataJpaVoteRepository voteRepository;
+    private VoteService voteService;
 
     @Autowired
-    private DataJpaUserRepository userRepository;
+    private UserService userService;
 
     @Autowired
-    private DataJpaRestaurantRepository restaurantRepository;
+    private RestaurantService restaurantService;
 
     @PostMapping("/{restaurantId}")
     public void createOrUpdate(@PathVariable int restaurantId) {
         int userId = ID;
-        Vote voteCurrentDate = voteRepository.getVoteCurrentDate(userId, LocalDate.now());
+        Vote voteCurrentDate = voteService.getVoteCurrentDate(userId, LocalDate.now());
 
         if (voteCurrentDate == null) {
             log.info("create vote for userID {} and restaurantId {}", ID, restaurantId);
-            Vote voteNew = new Vote(userRepository.findById(ID).orElse(null),   // todo check correctness orElse(null)
+            Vote voteNew = new Vote(userService.get(ID),   // todo check ID
                     LocalDate.now(),
-                    restaurantRepository.getOne(restaurantId));
-            voteRepository.save(voteNew);
+                    restaurantService.get(restaurantId));
+            voteService.create(voteNew);
         } else if (LocalTime.now().isAfter(LIMIT_TIME_FOR_VOTING)) {
             throw new NotFoundException("It is forbidden to vote again after 11:00");
         } else {
             log.info("update vote for userID {} restaurantId {}", ID, restaurantId);
             voteCurrentDate.setDate(LocalDate.now());
-            voteCurrentDate.setRestaurant(restaurantRepository.getOne(restaurantId));
-            voteRepository.save(voteCurrentDate);
+            voteCurrentDate.setRestaurant(restaurantService.get(restaurantId));
+            voteService.create(voteCurrentDate);
         }
     }
 }
