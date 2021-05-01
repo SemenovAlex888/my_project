@@ -165,11 +165,13 @@
             <artifactId>jackson-databind</artifactId>
             <version>${jackson-json.version}</version>
         </dependency>
+        <!-- module to ignore LAZY fields when serializing  https://github.com/FasterXML/jackson-datatype-hibernate-->
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-hibernate5</artifactId>
             <version>${jackson-json.version}</version>
         </dependency>
+
         <dependency>
             <groupId>com.fasterxml.jackson.datatype</groupId>
             <artifactId>jackson-datatype-jsr310</artifactId>

@@ -17,7 +17,7 @@ public class Vote extends AbstractBaseEntity {
     @JoinColumn(name = "user_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
-    @JsonIgnore
+    // @JsonIgnore (instead of @JsonIgnore annotation, the jackson-datatype-hibernate module is connected)
     private User user;
 
     @Column(name = "date_time", nullable = false)
@@ -29,7 +29,7 @@ public class Vote extends AbstractBaseEntity {
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @NotNull
-    @JsonIgnore
+    // @JsonIgnore (instead of @JsonIgnore annotation, the jackson-datatype-hibernate module is connected)
     private Restaurant restaurant;
 
     public Vote() {
