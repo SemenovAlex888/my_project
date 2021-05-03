@@ -8,7 +8,9 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import ru.my_project.model.Restaurant;
+import ru.my_project.to.SumVotes;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,4 +34,10 @@ public interface DataJpaRestaurantRepository extends JpaRepository<Restaurant, I
 
     @Override
     Optional<Restaurant> findById(Integer id);
+
+    // JPQL allows you to define a constructor call in the SELECT clause: https://thorben-janssen.com/jpql/#Grouping_8211_The_GROUP_BY_and_HAVING_clause
+    // How to join unrelated entities with JPA and Hibernate: https://thorben-janssen.com/how-to-join-unrelated-entities/
+    @Query("SELECT new ru.my_project.to.SumVotes(restaur.id, restaur.name, count (v)) FROM Restaurant restaur " +
+            "LEFT JOIN Vote v ON restaur.id = v.restaurant.id WHERE v.date = ?1 GROUP BY v.restaurant.id ORDER BY count (v) DESC")
+    List<SumVotes> getSumVotesCurrentDay(LocalDate date);
 }

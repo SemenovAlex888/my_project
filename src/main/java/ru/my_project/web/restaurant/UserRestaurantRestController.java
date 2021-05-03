@@ -1,11 +1,11 @@
 package ru.my_project.web.restaurant;
 
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.my_project.model.Restaurant;
+import ru.my_project.to.SumVotes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @RestController
@@ -18,5 +18,11 @@ public class UserRestaurantRestController extends AbstractRestaurantRestControll
     @GetMapping
     public List<Restaurant> getAllWithDishes() {
         return super.getAllWithDishes();
+    }
+
+    @Override
+    @GetMapping("/date")
+    public List<SumVotes> getSumVotesCurrentDay(@RequestParam(value = "date") LocalDate date) {
+        return super.getSumVotesCurrentDay(date);
     }
 }

@@ -4,7 +4,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 import ru.my_project.model.Restaurant;
 import ru.my_project.repository.DataJpaRestaurantRepository;
+import ru.my_project.to.SumVotes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static ru.my_project.util.ValidationUtil.checkNotFoundWithId;
@@ -38,5 +40,10 @@ public class RestaurantService {
     public void update(Restaurant restaurant, int id) {
         Assert.notNull(restaurant, "user must not be null");
         checkNotFoundWithId(repository.save(restaurant), restaurant.id());
+    }
+
+    public List<SumVotes> getSumVotesCurrentDay(LocalDate date) {
+        Assert.notNull(date, "date must not be null");
+        return repository.getSumVotesCurrentDay(date);
     }
 }

@@ -5,7 +5,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import ru.my_project.model.Restaurant;
 import ru.my_project.service.RestaurantService;
+import ru.my_project.to.SumVotes;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import static ru.my_project.util.ValidationUtil.assureIdConsistent;
@@ -42,5 +44,10 @@ public abstract class AbstractRestaurantRestController {
         log.info("update {} with id={}", restaurant, id);
         assureIdConsistent(restaurant, id);
         service.update(restaurant, id);
+    }
+
+    public List<SumVotes> getSumVotesCurrentDay(LocalDate date) {
+        log.info("getSumVotesCurrentDay for date={}", date);
+        return service.getSumVotesCurrentDay(date);
     }
 }
