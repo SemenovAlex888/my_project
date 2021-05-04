@@ -13,6 +13,7 @@ import ru.my_project.service.RestaurantService;
 import ru.my_project.service.UserService;
 import ru.my_project.service.VoteService;
 import ru.my_project.util.exception.NotFoundException;
+import ru.my_project.web.SecurityUtil;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -25,7 +26,6 @@ public class VoteRestController {
 
     static final String REST_URL = "/votes";
     protected final Logger log = LoggerFactory.getLogger(getClass());
-    private final int ID = 100000;  // Todo: change on Spring security
 
     @Autowired
     private VoteService voteService;
@@ -38,19 +38,19 @@ public class VoteRestController {
 
     @PostMapping("/{restaurantId}")
     public void createOrUpdate(@PathVariable int restaurantId) {
-        int userId = ID;
+        int userId = SecurityUtil.authUserId();
         Vote voteCurrentDate = voteService.getVoteCurrentDate(userId, LocalDate.now());
 
         if (voteCurrentDate == null) {
-            log.info("create vote for userID {} and restaurantId {}", ID, restaurantId);
-            Vote voteNew = new Vote(userService.get(ID),   // todo check ID
+            log.info("create vote for userID {} and restaurantId {}", userId, restaurantId);
+            Vote voteNew = new Vote(userService.get(userId),
                     LocalDate.now(),
                     restaurantService.get(restaurantId));
             voteService.create(voteNew);
         } else if (LocalTime.now().isAfter(LIMIT_TIME_FOR_VOTING)) {
             throw new NotFoundException("It is forbidden to vote again after 11:00");
         } else {
-            log.info("update vote for userID {} restaurantId {}", ID, restaurantId);
+            log.info("update vote for userID {} restaurantId {}", userId, restaurantId);
             voteCurrentDate.setDate(LocalDate.now());
             voteCurrentDate.setRestaurant(restaurantService.get(restaurantId));
             voteService.create(voteCurrentDate);

@@ -12,11 +12,11 @@ FROM votes;
 ALTER SEQUENCE GLOBAL_SEQ RESTART WITH 100000;
 
 INSERT INTO users (name, email, password)
-VALUES ('User1', 'user1@yandex.ru', 'password'),
-       ('Admin', 'admin@gmail.com', 'admin'),
-       ('User2', 'user2@yandex.ru', 'password'),
-       ('User3', 'user3@yandex.ru', 'password'),
-       ('User4', 'user4@yandex.ru', 'password');
+VALUES ('User1', 'user1@yandex.ru', '{noop}password'),
+       ('Admin', 'admin@gmail.com', '{noop}admin'),
+       ('User2', 'user2@yandex.ru', '{noop}password'),
+       ('User3', 'user3@yandex.ru', '{noop}password'),
+       ('User4', 'user4@yandex.ru', '{noop}password');
 
 INSERT INTO user_roles (role, user_id)
 VALUES ('USER', 100000),
