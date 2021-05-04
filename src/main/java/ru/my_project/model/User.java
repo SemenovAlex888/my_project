@@ -31,6 +31,9 @@ public class User extends AbstractNamedEntity{
     @Size(min = 6, max = 100)
     private String password;
 
+    @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
+    private boolean enabled = true;
+
     @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()")
     @NotNull
     private Date registered = new Date();
@@ -52,17 +55,18 @@ public class User extends AbstractNamedEntity{
 
     // Joshua Bloch's Effective Java: using the constructor to copy instead of the clone() method: https://jarombek.com/blog/may-15-2018-java-clone
     public User(User u) {
-        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.getRegistered(), u.getRoles());
+        this(u.getId(), u.getName(), u.getEmail(), u.getPassword(), u.isEnabled(), u.getRegistered(), u.getRoles());
     }
 
     public User(Integer id, String name, String email, String password, Role role, Role... roles) {
-        this(id, name, email, password, new Date(), EnumSet.of(role, roles));
+        this(id, name, email, password, true, new Date(), EnumSet.of(role, roles));
     }
 
-    public User(Integer id, String name, String email, String password, Date registered, Collection<Role> roles) {
+    public User(Integer id, String name, String email, String password, boolean enabled, Date registered, Collection<Role> roles) {
         super(id, name);
         this.email = email;
         this.password = password;
+        this.enabled = enabled;
         this.registered = registered;
         setRoles(roles);
     }
@@ -81,6 +85,14 @@ public class User extends AbstractNamedEntity{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
     }
 
     public Date getRegistered() {
@@ -106,6 +118,7 @@ public class User extends AbstractNamedEntity{
                 ", name='" + name + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", enabled=" + enabled +
                 ", registered=" + registered +
                 ", roles=" + roles +
                 '}';

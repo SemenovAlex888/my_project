@@ -1,5 +1,6 @@
 package ru.my_project.web.restaurant;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 import ru.my_project.model.Restaurant;
@@ -21,8 +22,8 @@ public class UserRestaurantRestController extends AbstractRestaurantRestControll
     }
 
     @Override
-    @GetMapping("/date")
-    public List<SumVotes> getSumVotesCurrentDay(@RequestParam(value = "date") LocalDate date) {
+    @GetMapping("/sum")     // Todo test failed in SOAP
+    public List<SumVotes> getSumVotesCurrentDay(@RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
         return super.getSumVotesCurrentDay(date);
     }
 }

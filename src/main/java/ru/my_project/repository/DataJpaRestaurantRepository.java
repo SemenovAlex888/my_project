@@ -35,6 +35,7 @@ public interface DataJpaRestaurantRepository extends JpaRepository<Restaurant, I
     @Override
     Optional<Restaurant> findById(Integer id);
 
+    // Todo change jpql query (exception in SoupUI)
     // JPQL allows you to define a constructor call in the SELECT clause: https://thorben-janssen.com/jpql/#Grouping_8211_The_GROUP_BY_and_HAVING_clause
     // How to join unrelated entities with JPA and Hibernate: https://thorben-janssen.com/how-to-join-unrelated-entities/
     @Query("SELECT new ru.my_project.to.SumVotes(restaur.id, restaur.name, count (v)) FROM Restaurant restaur " +

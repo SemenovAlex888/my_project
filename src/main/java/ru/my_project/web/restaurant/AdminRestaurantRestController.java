@@ -1,5 +1,6 @@
 package ru.my_project.web.restaurant;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -54,8 +55,8 @@ public class AdminRestaurantRestController extends AbstractRestaurantRestControl
     }
 
     @Override
-    @GetMapping("/date")
-    public List<SumVotes> getSumVotesCurrentDay(@RequestParam(value = "date") LocalDate date) {
+    @GetMapping("/sum")     // Todo test failed in SOAP
+    public List<SumVotes> getSumVotesCurrentDay(@RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {  // https://stackoverflow.com/questions/50626016/sending-requests-with-localdate-type-parameters
         return super.getSumVotesCurrentDay(date);
     }
 }
