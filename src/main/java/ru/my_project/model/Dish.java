@@ -47,6 +47,14 @@ public class Dish extends AbstractNamedEntity {
         this.price = price;
     }
 
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
     @Override
     public String toString() {
         return "Dish{" +
