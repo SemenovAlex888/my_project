@@ -18,8 +18,8 @@ import java.util.Optional;
 @Transactional(readOnly = true)
 public interface DataJpaRestaurantRepository extends JpaRepository<Restaurant, Integer> {
 
-    @Transactional
     @Modifying
+    @Transactional
     @Query("DELETE FROM Restaurant r WHERE r.id=:id")
     int delete(@Param("id") int id);
 
@@ -38,7 +38,8 @@ public interface DataJpaRestaurantRepository extends JpaRepository<Restaurant, I
     // Todo change jpql query (exception in SoupUI)
     // JPQL allows you to define a constructor call in the SELECT clause: https://thorben-janssen.com/jpql/#Grouping_8211_The_GROUP_BY_and_HAVING_clause
     // How to join unrelated entities with JPA and Hibernate: https://thorben-janssen.com/how-to-join-unrelated-entities/
-    @Query("SELECT new ru.my_project.to.SumVotes(restaur.id, restaur.name, count (v)) FROM Restaurant restaur " +
-            "LEFT JOIN Vote v ON restaur.id = v.restaurant.id WHERE v.date = ?1 GROUP BY v.restaurant.id ORDER BY count (v) DESC")
-    List<SumVotes> getSumVotesCurrentDay(LocalDate date);
+    //@Query("SELECT new ru.my_project.to.SumVotes(restaur.id, restaur.name, count (v)) FROM Restaurant restaur " +
+    //        "LEFT JOIN Vote v ON restaur.id = v.restaurant.id WHERE v.date = ?1 GROUP BY v.restaurant.id ORDER BY count (v) DESC")
+    @Query("SELECT new ru.my_project.to.SumVotes(r.id, r.name, count(v.id)) FROM Vote v LEFT JOIN Restaurant r ON r.id = v.restaurant.id WHERE v.date = :currentDate GROUP BY r.id ORDER BY count(v.id) DESC")
+    List<SumVotes> getSumVotesCurrentDay(@Param("currentDate") LocalDate date);
 }

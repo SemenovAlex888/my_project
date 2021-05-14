@@ -28,7 +28,7 @@ public class DishRestController {
     private DishService service;
 
     @GetMapping
-    public List<Dish> getAll(int restaurId) {   // Todo: add @PathVariable?
+    public List<Dish> getAll(int restaurId) {
         log.info("getAll");
         return service.getAll(restaurId);
     }
