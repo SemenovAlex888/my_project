@@ -40,7 +40,8 @@ A system that allows you to determine in which restaurant to dine based on a vot
 
 > `curl -s -X DELETE http://localhost:8080/my_project/admin/users/100004 --user admin@gmail.com:admin`
 
--  update User 100003
+-  update User 100003:
+
 > `curl -s -X PUT -d '{"id": 100003,
       "name": "User3",
       "email": "user333@yandex.ru",
@@ -49,9 +50,9 @@ A system that allows you to determine in which restaurant to dine based on a vot
       "registered": "2021-05-12T13:05:27.357+00:00",
       "roles": ["USER"]}' -H 'Content-Type: application/json' http://localhost:8080/my_project/admin/users/100003 --user admin@gmail.com:admin`
 
+-  get User by email:
 
-
-
+> `curl -s http://localhost:8080/my_project/admin/users/by?email=user2@yandex.ru --user admin@gmail.com:admin`
 
 
 
