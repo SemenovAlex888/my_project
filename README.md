@@ -133,11 +133,6 @@ A system that allows you to determine in which restaurant to dine based on a vot
 
  #### Test DishRestController
 
- - create Dish: 
-
-> `curl -s -X POST -d '{"name": "New Mozzarella",
-   "price": 750}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/my_project/admin/restaurant/100005/dishes --user admin@gmail.com:admin`
-
  - get all Dishes for Restaurant 100005:
 
 > `curl -s http://localhost:8080/my_project/admin/restaurant/100005/dishes --user admin@gmail.com:admin`
@@ -146,20 +141,23 @@ A system that allows you to determine in which restaurant to dine based on a vot
     
 > `curl -s http://localhost:8080/my_project/admin/restaurant/100005/dishes/100011 --user admin@gmail.com:admin`
 
+ - create Dish: 
+
+> `curl -s -X POST -d '{"name": "New Mozzarella",
+   "price": 750}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/my_project/admin/restaurant/100005/dishes --user admin@gmail.com:admin`
+
+-  update Dish 100012 for Restaurant 100005:
+
+> `curl -s -X PUT -d '{"name": "Beef Pho Bo",
+            "price": 1500}' -H 'Content-Type: application/json' http://localhost:8080/my_project/admin/restaurant/100005/dishes/100012 --user admin@gmail.com:admin`
+
+- delete Dish 100010 for Restaurant 100005:
+
+> `curl -s -X DELETE http://localhost:8080/my_project/admin/restaurant/100005/dishes/100010 --user admin@gmail.com:admin`
 
 
+ #### Test VoteRestController
 
+ - voting for the selected restaurant:
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+> `curl -s -X POST http://localhost:8080/my_project/votes/100008 --user user1@yandex.ru:password`
