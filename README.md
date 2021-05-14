@@ -23,6 +23,14 @@ A system that allows you to determine in which restaurant to dine based on a vot
 
 > `curl -s http://localhost:8080/my_project/admin/users --user admin@gmail.com:admin`
 
+- get User 100002:
+    
+> `curl -s http://localhost:8080/my_project/admin/users/100002 --user admin@gmail.com:admin`
+
+-  get User by email:
+
+> `curl -s http://localhost:8080/my_project/admin/users/by?email=user2@yandex.ru --user admin@gmail.com:admin`
+
  - create User: 
 
 > `curl -s -X POST -d '{"name": "User5",
@@ -31,14 +39,6 @@ A system that allows you to determine in which restaurant to dine based on a vot
       "enabled": true,
       "registered": "2021-05-12T13:05:27.357+00:00",
       "roles": ["USER"]}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/my_project/admin/users --user admin@gmail.com:admin`
-     
-- get User 100002:
-    
-> `curl -s http://localhost:8080/my_project/admin/users/100002 --user admin@gmail.com:admin`
-
-- delete User 100004:
-
-> `curl -s -X DELETE http://localhost:8080/my_project/admin/users/100004 --user admin@gmail.com:admin`
 
 -  update User 100003:
 
@@ -50,9 +50,46 @@ A system that allows you to determine in which restaurant to dine based on a vot
       "registered": "2021-05-12T13:05:27.357+00:00",
       "roles": ["USER"]}' -H 'Content-Type: application/json' http://localhost:8080/my_project/admin/users/100003 --user admin@gmail.com:admin`
 
--  get User by email:
+- delete User 100004:
 
-> `curl -s http://localhost:8080/my_project/admin/users/by?email=user2@yandex.ru --user admin@gmail.com:admin`
+> `curl -s -X DELETE http://localhost:8080/my_project/admin/users/100004 --user admin@gmail.com:admin`
+
+ #### Test UserRestController
+
+- get User:
+    
+> `curl -s http://localhost:8080/my_project/user --user user2@yandex.ru:password`
+
+- User registration:
+
+> `curl -s -X POST -d '{"name": "User5",
+   "email": "user5@yandex.ru",
+   "password": "password",
+   "enabled": true,
+   "registered": "2021-05-12T13:05:27.357+00:00",
+   "roles": ["USER"]}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/my_project/user/register`
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
