@@ -14,8 +14,11 @@ A system that allows you to determine in which restaurant to dine based on a vot
  
  cURL commands:
  
- ### Get the voting results for the specified date
- * `curl -s http://localhost:8080/my_project/user/restaurants/sum?date=2021-04-09 --user admin@gmail.com:admin`
+ 
+ ## Get the voting results for the specified date
+ 
+ * `curl -s http://localhost:8080/my_project/user/restaurants/sum?date=2021-04-09 --user user1@yandex.ru:password`
+ 
  
  #### Test AdminRestController
  
@@ -54,6 +57,7 @@ A system that allows you to determine in which restaurant to dine based on a vot
 
 > `curl -s -X DELETE http://localhost:8080/my_project/admin/users/100004 --user admin@gmail.com:admin`
 
+
  #### Test UserRestController
 
 - get User:
@@ -69,17 +73,78 @@ A system that allows you to determine in which restaurant to dine based on a vot
    "registered": "2021-05-12T13:05:27.357+00:00",
    "roles": ["USER"]}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/my_project/user/register`
 
+-  update User 100002:
+
+> `curl -s -X PUT -d '{"id": 100002,
+   "name": "User2222",
+   "email": "user2@yandex.ru",
+   "password": "password",
+   "enabled": true,
+   "registered": "2021-05-12T13:05:27.357+00:00",
+   "roles": ["USER"]}' -H 'Content-Type: application/json' http://localhost:8080/my_project/user --user user2@yandex.ru:password`
 
 
+- delete User 100000:
+
+> `curl -s -X DELETE http://localhost:8080/my_project/user --user user1@yandex.ru:password`
 
 
+ #### Test AdminRestaurantRestController
+
+ - get All Restaurants with dishes:
+
+> `curl -s http://localhost:8080/my_project/admin/restaurants/ --user admin@gmail.com:admin`
+
+- get Restaurant 100006:
+    
+> `curl -s http://localhost:8080/my_project/admin/restaurants/100006 --user admin@gmail.com:admin`
+
+ - create Restaurant: 
+
+> `curl -s -X POST -d '{"name": "Mansarda2",
+   "address": "Pochtamtskaya st., 7",
+   "dishes": null}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/my_project/admin/restaurants/ --user admin@gmail.com:admin`
+
+-  update Restaurant 100006:
+
+> `curl -s -X PUT -d '{"id": 100006,
+      "name": "Rome",
+      "address": "Moskovsky prospect, 97A"}' -H 'Content-Type: application/json' http://localhost:8080/my_project/admin/restaurants/100006 --user admin@gmail.com:admin`
+
+- delete Restaurant 100005:
+
+> `curl -s -X DELETE http://localhost:8080/my_project/admin/restaurants/100005 --user admin@gmail.com:admin`
+
+ - get the voting results for the specified date:
+
+> `curl -s http://localhost:8080/my_project/admin/restaurants/sum?date=2021-04-09 --user admin@gmail.com:admin`
 
 
+ #### Test UserRestaurantRestController
+
+ - get All Restaurants with dishes:
+
+> `curl -s http://localhost:8080/my_project/user/restaurants --user user1@yandex.ru:password`
+
+ - get the voting results for the specified date:
+
+> `curl -s http://localhost:8080/my_project/user/restaurants/sum?date=2021-04-09 --user user1@yandex.ru:password`
 
 
+ #### Test DishRestController
 
+ - create Dish: 
 
+> `curl -s -X POST -d '{"name": "New Mozzarella",
+   "price": 750}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/my_project/admin/restaurant/100005/dishes --user admin@gmail.com:admin`
 
+ - get all Dishes for Restaurant 100005:
+
+> `curl -s http://localhost:8080/my_project/admin/restaurant/100005/dishes --user admin@gmail.com:admin`
+
+- get Dish 100011 for Restaurant 100005:
+    
+> `curl -s http://localhost:8080/my_project/admin/restaurant/100005/dishes/100011 --user admin@gmail.com:admin`
 
 
 
