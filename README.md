@@ -95,25 +95,25 @@ A system that allows you to determine in which restaurant to dine based on a vot
 
  - get all Dishes for Restaurant 100005:
 
-> `curl -s http://localhost:8080/my_project/admin/restaurant/100005/dishes --user admin@gmail.com:admin`
+> `curl -s http://localhost:8080/my_project/admin/restaurants/100005/dishes --user admin@gmail.com:admin`
 
 - get Dish 100011 for Restaurant 100005:
     
-> `curl -s http://localhost:8080/my_project/admin/restaurant/100005/dishes/100011 --user admin@gmail.com:admin`
+> `curl -s http://localhost:8080/my_project/admin/restaurants/100005/dishes/100011 --user admin@gmail.com:admin`
 
  - create Dish: 
 
 > `curl -s -X POST -d '{"name": "New Mozzarella",
-   "price": 750}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/my_project/admin/restaurant/100005/dishes --user admin@gmail.com:admin`
+   "price": 750}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/my_project/admin/restaurants/100005/dishes --user admin@gmail.com:admin`
 
 -  update Dish 100012 for Restaurant 100005:
 
 > `curl -s -X PUT -d '{"name": "Beef Pho Bo",
-            "price": 1500}' -H 'Content-Type: application/json' http://localhost:8080/my_project/admin/restaurant/100005/dishes/100012 --user admin@gmail.com:admin`
+            "price": 1500}' -H 'Content-Type: application/json' http://localhost:8080/my_project/admin/restaurants/100005/dishes/100012 --user admin@gmail.com:admin`
 
 - delete Dish 100010 for Restaurant 100005:
 
-> `curl -s -X DELETE http://localhost:8080/my_project/admin/restaurant/100005/dishes/100010 --user admin@gmail.com:admin`
+> `curl -s -X DELETE http://localhost:8080/my_project/admin/restaurants/100005/dishes/100010 --user admin@gmail.com:admin`
 
 
  ### User actions
