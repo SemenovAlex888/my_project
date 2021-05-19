@@ -20,7 +20,9 @@ A system that allows you to determine in which restaurant to dine based on a vot
  * `curl -s http://localhost:8080/my_project/user/restaurants/sum?date=2021-04-09 --user user1@yandex.ru:password`
  
  
- #### Test AdminRestController
+ ### Administrator actions
+ 
+ #### Work with Users
  
  - get All Users:
 
@@ -58,38 +60,7 @@ A system that allows you to determine in which restaurant to dine based on a vot
 > `curl -s -X DELETE http://localhost:8080/my_project/admin/users/100004 --user admin@gmail.com:admin`
 
 
- #### Test UserRestController
-
-- get User:
-    
-> `curl -s http://localhost:8080/my_project/user --user user2@yandex.ru:password`
-
-- User registration:
-
-> `curl -s -X POST -d '{"name": "User5",
-   "email": "user5@yandex.ru",
-   "password": "password",
-   "enabled": true,
-   "registered": "2021-05-12T13:05:27.357+00:00",
-   "roles": ["USER"]}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/my_project/user/register`
-
--  update User 100002:
-
-> `curl -s -X PUT -d '{"id": 100002,
-   "name": "User2222",
-   "email": "user2@yandex.ru",
-   "password": "password",
-   "enabled": true,
-   "registered": "2021-05-12T13:05:27.357+00:00",
-   "roles": ["USER"]}' -H 'Content-Type: application/json' http://localhost:8080/my_project/user --user user2@yandex.ru:password`
-
-
-- delete User 100000:
-
-> `curl -s -X DELETE http://localhost:8080/my_project/user --user user1@yandex.ru:password`
-
-
- #### Test AdminRestaurantRestController
+ #### Working with restaurants
 
  - get All Restaurants with dishes:
 
@@ -120,18 +91,7 @@ A system that allows you to determine in which restaurant to dine based on a vot
 > `curl -s http://localhost:8080/my_project/admin/restaurants/sum?date=2021-04-09 --user admin@gmail.com:admin`
 
 
- #### Test UserRestaurantRestController
-
- - get All Restaurants with dishes:
-
-> `curl -s http://localhost:8080/my_project/user/restaurants --user user1@yandex.ru:password`
-
- - get the voting results for the specified date:
-
-> `curl -s http://localhost:8080/my_project/user/restaurants/sum?date=2021-04-09 --user user1@yandex.ru:password`
-
-
- #### Test DishRestController
+ #### Working with dishes
 
  - get all Dishes for Restaurant 100005:
 
@@ -156,7 +116,51 @@ A system that allows you to determine in which restaurant to dine based on a vot
 > `curl -s -X DELETE http://localhost:8080/my_project/admin/restaurant/100005/dishes/100010 --user admin@gmail.com:admin`
 
 
- #### Test VoteRestController
+ ### User actions
+ 
+ #### Working with a profile
+
+- get User:
+    
+> `curl -s http://localhost:8080/my_project/user --user user2@yandex.ru:password`
+
+- User registration:
+
+> `curl -s -X POST -d '{"name": "User5",
+   "email": "user5@yandex.ru",
+   "password": "password",
+   "enabled": true,
+   "registered": "2021-05-12T13:05:27.357+00:00",
+   "roles": ["USER"]}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/my_project/user/register`
+
+-  update User 100002:
+
+> `curl -s -X PUT -d '{"id": 100002,
+   "name": "User2222",
+   "email": "user2@yandex.ru",
+   "password": "password",
+   "enabled": true,
+   "registered": "2021-05-12T13:05:27.357+00:00",
+   "roles": ["USER"]}' -H 'Content-Type: application/json' http://localhost:8080/my_project/user --user user2@yandex.ru:password`
+
+- delete User 100000:
+
+> `curl -s -X DELETE http://localhost:8080/my_project/user --user user1@yandex.ru:password`
+
+
+
+ #### Working with restaurants
+
+ - get All Restaurants with dishes:
+
+> `curl -s http://localhost:8080/my_project/user/restaurants --user user1@yandex.ru:password`
+
+ - get the voting results for the specified date:
+
+> `curl -s http://localhost:8080/my_project/user/restaurants/sum?date=2021-04-09 --user user1@yandex.ru:password`
+
+
+ #### Voting for a restaurant
 
  - voting for the selected restaurant:
 
