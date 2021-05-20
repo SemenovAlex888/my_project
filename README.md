@@ -62,7 +62,7 @@ A system that allows you to determine in which restaurant to dine based on a vot
 
  #### Working with restaurants
 
- - get All Restaurants with dishes for the specified date:
+ - get All Restaurants with dishes for the specified date (if no date is specified, then the date is equal to the current one):
 
 > `curl -s http://localhost:8080/my_project/admin/restaurants/?date=2021-04-09 --user admin@gmail.com:admin`
 
@@ -153,7 +153,7 @@ A system that allows you to determine in which restaurant to dine based on a vot
 
  #### Working with restaurants
 
- - get All Restaurants with dishes for the specified date:
+ - get All Restaurants with dishes for the specified date (if no date is specified, then the date is equal to the current one):
 
 > `curl -s http://localhost:8080/my_project/user/restaurants?date=2021-04-09 --user user1@yandex.ru:password`
 
@@ -166,4 +166,4 @@ A system that allows you to determine in which restaurant to dine based on a vot
 
  - voting for the selected restaurant:
 
-> `curl -s -X POST http://localhost:8080/my_project/votes/100008 --user user1@yandex.ru:password`
+> `curl -s -X POST http://localhost:8080/my_project/restaurants/100008/votes --user user1@yandex.ru:password`

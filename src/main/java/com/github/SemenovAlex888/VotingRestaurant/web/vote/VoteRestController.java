@@ -24,7 +24,7 @@ import static com.github.SemenovAlex888.VotingRestaurant.util.ValidationUtil.LIM
 @RequestMapping(value = VoteRestController.REST_URL, produces = MediaType.APPLICATION_JSON_VALUE)
 public class VoteRestController {
 
-    static final String REST_URL = "/votes";
+    static final String REST_URL = "/restaurants/{restaurantId}/votes";
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
     @Autowired
@@ -36,7 +36,7 @@ public class VoteRestController {
     @Autowired
     private RestaurantService restaurantService;
 
-    @PostMapping("/{restaurantId}")
+    @PostMapping
     public void createOrUpdate(@PathVariable int restaurantId) {
         int userId = SecurityUtil.authUserId();
         Vote voteCurrentDate = voteService.getVoteCurrentDate(userId, LocalDate.now());
