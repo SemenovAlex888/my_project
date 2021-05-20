@@ -13,10 +13,10 @@
 
     <context:property-placeholder location="classpath:db/hsqldb.properties" system-properties-mode="OVERRIDE"/>
 
-    <context:component-scan base-package="ru.my_project.repository"/>
+    <context:component-scan base-package="com.github.SemenovAlex888.VotingRestaurant.repository"/>
 
     <!-- base package of the repository -->
-    <jpa:repositories base-package="ru.my_project.**.repository"/>
+    <jpa:repositories base-package="com.github.SemenovAlex888.VotingRestaurant.repository"/>
 
     <jdbc:initialize-database data-source="dataSource" enabled="${database.init}">
         <jdbc:script location="${jdbc.initLocation}"/>
@@ -38,7 +38,7 @@
     <!-- entity manager factory bean -->
     <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean"
           p:dataSource-ref="dataSource"
-          p:packagesToScan="ru.my_project.**.model">
+          p:packagesToScan="com.github.SemenovAlex888.VotingRestaurant.model">
         <!--p:persistenceUnitName="persistenceUnit">-->
 
         <!-- Set JPA properties -->
@@ -65,10 +65,10 @@
     <bean id="sessionFactory"
           class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
         <property name="dataSource" ref="dataSource"/>
-        <property name="packagesToScan" value="ru.my_project.model"/>
+        <property name="packagesToScan" value="com.github.SemenovAlex888.VotingRestaurant.model"/>
         <property name="hibernateProperties">
             <props>
-                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</prop>
+                <prop key="hibernate.dialect">org.hibernate.dialect.HSQLDialect</prop>
                 <prop key="hibernate.show_sql">true</prop>
             </props>
         </property>
