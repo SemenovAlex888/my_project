@@ -35,7 +35,7 @@ public class Dish extends AbstractNamedEntity {
     public Dish() {
     }
 
-    public Dish(String name, BigDecimal price) {    // Todo check the need
+    public Dish(String name, BigDecimal price) {
         this(null,name, price);
     }
 
