@@ -62,9 +62,9 @@ A system that allows you to determine in which restaurant to dine based on a vot
 
  #### Working with restaurants
 
- - get All Restaurants with dishes:
+ - get All Restaurants with dishes for the specified date:
 
-> `curl -s http://localhost:8080/my_project/admin/restaurants/ --user admin@gmail.com:admin`
+> `curl -s http://localhost:8080/my_project/admin/restaurants/?date=2021-04-09 --user admin@gmail.com:admin`
 
 - get Restaurant 100006:
     
@@ -104,12 +104,14 @@ A system that allows you to determine in which restaurant to dine based on a vot
  - create Dish: 
 
 > `curl -s -X POST -d '{"name": "New Mozzarella",
-   "price": 750}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/my_project/admin/restaurants/100005/dishes --user admin@gmail.com:admin`
+"price": 750,
+"date": "2021-05-20"}' -H 'Content-Type:application/json;charset=UTF-8' http://localhost:8080/my_project/admin/restaurants/100005/dishes --user admin@gmail.com:admin`
 
 -  update Dish 100012 for Restaurant 100005:
 
 > `curl -s -X PUT -d '{"name": "Beef Pho Bo",
-            "price": 1500}' -H 'Content-Type: application/json' http://localhost:8080/my_project/admin/restaurants/100005/dishes/100012 --user admin@gmail.com:admin`
+"price": 1500,
+"date": "2021-05-20"}' -H 'Content-Type: application/json' http://localhost:8080/my_project/admin/restaurants/100005/dishes/100012 --user admin@gmail.com:admin`
 
 - delete Dish 100010 for Restaurant 100005:
 
@@ -151,9 +153,9 @@ A system that allows you to determine in which restaurant to dine based on a vot
 
  #### Working with restaurants
 
- - get All Restaurants with dishes:
+ - get All Restaurants with dishes for the specified date:
 
-> `curl -s http://localhost:8080/my_project/user/restaurants --user user1@yandex.ru:password`
+> `curl -s http://localhost:8080/my_project/user/restaurants?date=2021-04-09 --user user1@yandex.ru:password`
 
  - get the voting results for the specified date:
 

@@ -9,6 +9,7 @@ import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "dishes", uniqueConstraints = {@UniqueConstraint(columnNames =
@@ -26,6 +27,10 @@ public class Dish extends AbstractNamedEntity {
     @JoinColumn(name = "restaurant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Restaurant restaurant;
+
+    @Column(name = "date", nullable = false)
+    @NotNull
+    private LocalDate date;
 
     public Dish() {
     }

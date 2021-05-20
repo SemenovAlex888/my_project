@@ -20,8 +20,8 @@ public class RestaurantService {
         this.repository = repository;
     }
 
-    public List<Restaurant> getAllWithDishes() {
-        return repository.findAllWithDishes();
+    public List<Restaurant> getAllWithDishesForDate(LocalDate date) {
+        return repository.getAllWithDishesForDate(date);
     }
 
     public Restaurant get(int id) {

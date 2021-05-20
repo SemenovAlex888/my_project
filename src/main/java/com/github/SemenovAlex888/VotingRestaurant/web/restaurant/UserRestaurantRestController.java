@@ -17,8 +17,8 @@ public class UserRestaurantRestController extends AbstractRestaurantRestControll
 
     @Override
     @GetMapping
-    public List<Restaurant> getAllWithDishes() {
-        return super.getAllWithDishes();
+    public List<Restaurant> getAllWithDishesForDate(@RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)  LocalDate date) {
+        return super.getAllWithDishesForDate(date);
     }
 
     @Override

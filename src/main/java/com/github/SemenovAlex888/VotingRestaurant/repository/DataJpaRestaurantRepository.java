@@ -29,8 +29,8 @@ public interface DataJpaRestaurantRepository extends JpaRepository<Restaurant, I
 
     //    https://stackoverflow.com/a/46013654/548473
     @EntityGraph(attributePaths = {"dishes"}, type = EntityGraph.EntityGraphType.LOAD)
-    @Query("SELECT r FROM Restaurant r")
-    List<Restaurant> findAllWithDishes();
+    @Query("SELECT r FROM Restaurant r LEFT JOIN FETCH r.dishes d WHERE d.date = ?1")
+    List<Restaurant> getAllWithDishesForDate(LocalDate date);
 
     @Override
     Optional<Restaurant> findById(Integer id);

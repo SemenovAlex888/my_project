@@ -21,8 +21,8 @@ public class AdminRestaurantRestController extends AbstractRestaurantRestControl
 
     @Override
     @GetMapping
-    public List<Restaurant> getAllWithDishes() {
-        return super.getAllWithDishes();
+    public List<Restaurant> getAllWithDishesForDate(@RequestParam(value = "date", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {
+        return super.getAllWithDishesForDate(date);
     }
 
     @Override
@@ -55,7 +55,7 @@ public class AdminRestaurantRestController extends AbstractRestaurantRestControl
     }
 
     @Override
-    @GetMapping("/sum")     // Todo test failed in SOAP
+    @GetMapping("/sum")
     public List<SumVotes> getSumVotesCurrentDay(@RequestParam(value = "date") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate date) {  // https://stackoverflow.com/questions/50626016/sending-requests-with-localdate-type-parameters
         return super.getSumVotesCurrentDay(date);
     }

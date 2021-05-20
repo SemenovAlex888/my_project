@@ -19,9 +19,9 @@ public abstract class AbstractRestaurantRestController {
     @Autowired
     private RestaurantService service;
 
-    public List<Restaurant> getAllWithDishes() {
-        log.info("getAll");
-        return service.getAllWithDishes();
+    public List<Restaurant> getAllWithDishesForDate(LocalDate date) {
+        log.info("getAllWithDishesForDate");
+        return service.getAllWithDishesForDate(date == null ? LocalDate.now() : date);
     }
 
     public Restaurant get(int id) {

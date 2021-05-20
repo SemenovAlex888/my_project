@@ -33,26 +33,26 @@ VALUES ('Mansarda', 'Pochtamtskaya st., 3'),
        ('Gastronomica', 'st. Marata, 5/21'),
        ('Moscow', 'Nevsky prospect, 114');
 
-INSERT INTO dishes(restaurant_id, name, price)
-VALUES (100005, 'English breakfast', 750.00),
-       (100005, 'Mozzarella and shrimp salad', 950.00),
-       (100005, 'Beef Pho Bo', 1200.00),
+INSERT INTO dishes(restaurant_id, name, price, date)
+VALUES (100005, 'English breakfast', 750.00, '2021-04-09'),
+       (100005, 'Mozzarella and shrimp salad', 950.00, '2021-04-09'),
+       (100005, 'Beef Pho Bo', 1200.00, '2021-04-09'),
 
-       (100006, 'Salmon, poached egg', 490.00),
-       (100006, 'Zucchini and apple salad', 450.00),
-       (100006, 'Classic Miso soup', 250.00),
+       (100006, 'Salmon, poached egg', 490.00, '2021-04-09'),
+       (100006, 'Zucchini and apple salad', 450.00, '2021-04-09'),
+       (100006, 'Classic Miso soup', 250.00, '2021-04-09'),
 
-       (100007, 'Combo breakfast', 510.00),
-       (100007, 'Octopus salad with honey', 1000.00),
-       (100007, 'Tom Yum Potak', 650.00),
+       (100007, 'Combo breakfast', 510.00, '2021-04-09'),
+       (100007, 'Octopus salad with honey', 1000.00, '2021-04-09'),
+       (100007, 'Tom Yum Potak', 650.00, '2021-04-09'),
 
-       (100008, 'Beefsteak with egg and bacon', 470.00),
-       (100008, 'Crispy duck', 700.00),
-       (100008, 'Meat solyanka', 550.00),
+       (100008, 'Beefsteak with egg and bacon', 470.00, '2021-04-09'),
+       (100008, 'Crispy duck', 700.00, '2021-04-09'),
+       (100008, 'Meat solyanka', 550.00, '2021-04-09'),
 
-       (100009, 'Sunny side up eggs', 200.00),
-       (100009, 'Salmon poke', 750.00),
-       (100009, 'Mushroom soup', 400.00);
+       (100009, 'Sunny side up eggs', 200.00, '2021-04-09'),
+       (100009, 'Salmon poke', 750.00, '2021-04-09'),
+       (100009, 'Mushroom soup', 400.00, '2021-04-09');
 
 INSERT INTO votes(user_id, date_time, restaurant_id)
 VALUES (100000, '2021-04-09', 100008),
