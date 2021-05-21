@@ -1,5 +1,11 @@
 package com.github.SemenovAlex888.VotingRestaurant.web.vote;
 
+import com.github.SemenovAlex888.VotingRestaurant.model.Vote;
+import com.github.SemenovAlex888.VotingRestaurant.service.RestaurantService;
+import com.github.SemenovAlex888.VotingRestaurant.service.UserService;
+import com.github.SemenovAlex888.VotingRestaurant.service.VoteService;
+import com.github.SemenovAlex888.VotingRestaurant.util.exception.BanUpdatesException;
+import com.github.SemenovAlex888.VotingRestaurant.web.SecurityUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,12 +14,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.github.SemenovAlex888.VotingRestaurant.model.Vote;
-import com.github.SemenovAlex888.VotingRestaurant.service.RestaurantService;
-import com.github.SemenovAlex888.VotingRestaurant.service.UserService;
-import com.github.SemenovAlex888.VotingRestaurant.service.VoteService;
-import com.github.SemenovAlex888.VotingRestaurant.util.exception.NotFoundException;
-import com.github.SemenovAlex888.VotingRestaurant.web.SecurityUtil;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -39,21 +39,25 @@ public class VoteRestController {
     @PostMapping
     public void createOrUpdate(@PathVariable int restaurantId) {
         int userId = SecurityUtil.authUserId();
-        Vote voteCurrentDate = voteService.getVoteCurrentDate(userId, LocalDate.now());
 
-        if (voteCurrentDate == null) {
-            log.info("create vote for userID {} and restaurantId {}", userId, restaurantId);
-            Vote voteNew = new Vote(userService.get(userId),
+        if (LocalTime.now().isBefore(LIMIT_TIME_FOR_VOTING)) {
+            log.info("create or update (if before 11:00) vote for userID {} and restaurantId {}", userId, restaurantId);
+            Vote voteNew = new Vote(userService.get(userId),    // Todo: change access on Security context?
                     LocalDate.now(),
-                    restaurantService.get(restaurantId));
-            voteService.create(voteNew);
-        } else if (LocalTime.now().isAfter(LIMIT_TIME_FOR_VOTING)) {
-            throw new NotFoundException("It is forbidden to vote again after 11:00");
+                    restaurantService.getOne(restaurantId));    // Difference between getOne and findById in Spring Data JPA: https://www.javacodemonk.com/difference-between-getone-and-findbyid-in-spring-data-jpa-3a96c3ff
+            voteService.create(voteNew);    // Spring data: CrudRepository's save method and update: https://stackoverflow.com/questions/38893831/spring-data-crudrepositorys-save-method-and-update
         } else {
-            log.info("update vote for userID {} restaurantId {}", userId, restaurantId);
-            voteCurrentDate.setDate(LocalDate.now());
-            voteCurrentDate.setRestaurant(restaurantService.get(restaurantId));
-            voteService.create(voteCurrentDate);
+            Vote voteCurrentDate = voteService.getVoteCurrentDate(userId, LocalDate.now());
+
+            if (voteCurrentDate != null) {
+                throw new BanUpdatesException("It is forbidden to vote again after 11:00");
+            } else {
+                log.info("create vote for userID {} and restaurantId {}", userId, restaurantId);
+                Vote voteNew = new Vote(userService.get(userId),    // Todo: change access on Security context?
+                        LocalDate.now(),
+                        restaurantService.getOne(restaurantId));
+                voteService.create(voteNew);
+            }
         }
     }
 }

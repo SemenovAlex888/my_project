@@ -35,6 +35,9 @@ public interface DataJpaRestaurantRepository extends JpaRepository<Restaurant, I
     @Override
     Optional<Restaurant> findById(Integer id);
 
+    @Override
+    Restaurant getOne(Integer restaurantId);
+
     // JPQL allows you to define a constructor call in the SELECT clause: https://thorben-janssen.com/jpql/#Grouping_8211_The_GROUP_BY_and_HAVING_clause
     // How to join unrelated entities with JPA and Hibernate: https://thorben-janssen.com/how-to-join-unrelated-entities/
     @Query("SELECT new com.github.SemenovAlex888.VotingRestaurant.to.SumVotes(r.id, r.name, count(v.id)) FROM Vote v LEFT JOIN Restaurant r ON r.id = v.restaurant.id WHERE v.date = :currentDate GROUP BY r.id ORDER BY count(v.id) DESC")

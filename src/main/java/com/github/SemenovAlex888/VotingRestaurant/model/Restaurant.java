@@ -28,7 +28,7 @@ public class Restaurant extends AbstractNamedEntity {
         this(r.getId(), r.getName(), r.getDishes(), r.getAddress());
     }
 
-    public Restaurant(String name, Set<Dish> dishes, String address) { // Todo check the need
+    public Restaurant(String name, Set<Dish> dishes, String address) {
         this(null, name, dishes, address);
     }
 

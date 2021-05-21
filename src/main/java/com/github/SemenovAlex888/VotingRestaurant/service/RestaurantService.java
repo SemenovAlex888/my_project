@@ -28,6 +28,10 @@ public class RestaurantService {
         return checkNotFoundWithId(repository.findById(id).orElse(null), id);
     }
 
+    public Restaurant getOne(int restaurantId) {
+        return checkNotFoundWithId(repository.getOne(restaurantId), restaurantId);
+    }
+
     public Restaurant create(Restaurant restaurant) {
         Assert.notNull(restaurant, "restaurant must not be null");
         return repository.save(restaurant);
