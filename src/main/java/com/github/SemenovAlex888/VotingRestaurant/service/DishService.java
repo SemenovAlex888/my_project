@@ -1,10 +1,9 @@
 package com.github.SemenovAlex888.VotingRestaurant.service;
 
-import org.springframework.stereotype.Service;
-import org.springframework.util.Assert;
 import com.github.SemenovAlex888.VotingRestaurant.model.Dish;
 import com.github.SemenovAlex888.VotingRestaurant.repository.DataJpaDishRepository;
 import com.github.SemenovAlex888.VotingRestaurant.repository.DataJpaRestaurantRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -26,18 +25,16 @@ public class DishService {
     }
 
     public Dish get(int dishId, int restaurantId) {
-        Dish dish = dishRepository.findById(dishId).orElse(null);
-        return checkNotFoundWithId(dish != null && dish.getRestaurant().getId() == restaurantId? dish : null, dishId);
+        return checkNotFoundWithId(dishRepository.getByRestaurantId(dishId, restaurantId), dishId);
     }
 
     public Dish save(Dish dish, int restaurantId) {
-        if(!dish.isNew() && get(dish.getId(), restaurantId) == null) {
+        if (!dish.isNew() && get(dish.getId(), restaurantId) == null) {
             dish = null;
         } else {
             dish.setRestaurant(restaurantRepository.getOne(restaurantId));
         }
 
-        Assert.notNull(dish, "dish must not be null");
         return dishRepository.save(dish);
     }
 
