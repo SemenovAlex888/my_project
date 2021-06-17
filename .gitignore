@@ -1,9 +1,5 @@
-# Default ignored files
-/shelf/
-/.idea/workspace.xml
-# Datasource local storage ignored files
-.idea
-/../../../../../../../../:\Users\pc\Documents\Projects_IT\TopJava\my_project\.idea/dataSources/
-/dataSources.local.xml
-# Editor-based HTTP Client requests
-/httpRequests/
+out
+target
+*.iml
+log
+*.patch
